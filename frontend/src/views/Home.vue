@@ -1,13 +1,20 @@
 <template>
 <div>
-  <h3>Roku:</h3>
   <div>
-    <div v-for="(host, index) in rokuHosts" :key="host">
-      <input type="radio" :id="`roku-${index}`" :value="host" v-model="rokuHost" />
-      <label for="`roku-${index}`">{{host}}</label>
+    <div v-if="discoveringRokus">
+      Finding Roku devices...
+    </div>
+    <div v-else>
+      <div v-if="! rokuHost">
+        Choose a Roku device:
+      </div>
+      <div v-for="(host, index) in rokuHosts" :key="host">
+        <input type="radio" :id="`roku-${index}`" :value="host" v-model="rokuHost" />
+        <label for="`roku-${index}`">{{host}}</label>
+      </div>
     </div>
   </div>
-  <div>
+  <div v-if="rokuHost">
     <button @click="apiInfo">info</button>
     <button @click="apiSelect">select</button>
     <button @click="apiUp">up</button>
@@ -25,11 +32,14 @@ const axios = require('axios')
 
 export default {
   async created () {
+    this.discoveringRokus = true
     const res = await axios.get('/api/discover')
     this.rokuHosts = res.data
+    this.discoveringRokus = false
   },
   data: function () {
     return {
+      discoveringRokus: false,
       rokuHost: null,
       rokuHosts: [],
     }
