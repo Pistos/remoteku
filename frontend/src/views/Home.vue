@@ -14,6 +14,8 @@
     <button @click="apiDown">down</button>
     <button @click="apiLeft">left</button>
     <button @click="apiRight">right</button>
+    <button @click="apiBack">back</button>
+    <button @click="apiHome">home</button>
   </div>
 </div>
 </template>
@@ -33,8 +35,14 @@ export default {
     }
   },
   methods: {
+    async apiBack () {
+      await axios.get('/api/back')
+    },
     async apiDown () {
       await axios.get('/api/down')
+    },
+    async apiHome () {
+      await axios.get('/api/home')
     },
     async apiInfo () {
       await axios.get('/api/info')

@@ -42,6 +42,16 @@ def info():
 
     return 'OK', 200
 
+@app.route('/api/back')
+def back():
+    current_roku.back()
+    return 'OK', 200
+
+@app.route('/api/home')
+def home():
+    current_roku.home()
+    return 'OK', 200
+
 @app.route('/api/up')
 def up():
     current_roku.up()
