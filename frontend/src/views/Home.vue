@@ -7,6 +7,14 @@
       <label for="`roku-${index}`">{{host}}</label>
     </div>
   </div>
+  <div>
+    <button @click="apiInfo">info</button>
+    <button @click="apiSelect">select</button>
+    <button @click="apiUp">up</button>
+    <button @click="apiDown">down</button>
+    <button @click="apiLeft">left</button>
+    <button @click="apiRight">right</button>
+  </div>
 </div>
 </template>
 
@@ -25,11 +33,33 @@ export default {
     }
   },
   methods: {
-    async select () {
-      const res = await axios.get('/api/select')
-      console.log(res)
+    async apiDown () {
+      await axios.get('/api/down')
+    },
+    async apiInfo () {
+      await axios.get('/api/info')
+    },
+    async apiLeft () {
+      await axios.get('/api/left')
+    },
+    async apiRight () {
+      await axios.get('/api/right')
+    },
+    async apiSelect () {
+      await axios.get('/api/select')
+    },
+    async apiUp () {
+      await axios.get('/api/up')
     },
   },
   name: 'Home',
+  watch: {
+    async rokuHost (newHost) {
+      await axios.put(
+        '/api/choose-roku',
+        {host: newHost}
+      )
+    },
+  },
 }
 </script>
