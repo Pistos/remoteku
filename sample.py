@@ -5,11 +5,11 @@ app = Flask(__name__)
 
 current_roku = None
 
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
+# @app.route('/')
+# def hello_world():
+    # return 'Hello, World!'
 
-@app.route('/choose-roku', methods=["PUT"])
+@app.route('/api/choose-roku', methods=["PUT"])
 def choose_roku():
     global current_roku
     req = request.get_json()
@@ -21,7 +21,7 @@ def choose_roku():
 
     return "OK", 200
 
-@app.route('/discover')
+@app.route('/api/discover')
 def discover():
     rokus = Roku.discover()
     hosts = list(
@@ -36,39 +36,39 @@ def discover():
         200
     )
 
-@app.route('/info')
+@app.route('/api/info')
 def info():
     current_roku.info()
 
     return 'OK', 200
 
-@app.route('/up')
+@app.route('/api/up')
 def up():
     current_roku.up()
     return 'OK', 200
 
-@app.route('/down')
+@app.route('/api/down')
 def down():
     current_roku.down()
     return 'OK', 200
 
-@app.route('/left')
+@app.route('/api/left')
 def left():
     current_roku.left()
     return 'OK', 200
 
-@app.route('/right')
+@app.route('/api/right')
 def right():
     current_roku.right()
     return 'OK', 200
 
-@app.route('/select')
+@app.route('/api/select')
 def select():
     current_roku.select()
 
     return 'OK', 200
 
-@app.route('/literal', methods=["POST"])
+@app.route('/api/literal', methods=["POST"])
 def literal():
     req = request.get_json()
     string = str(req['string'])
