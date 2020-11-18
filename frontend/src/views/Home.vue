@@ -5,12 +5,17 @@
       Finding Roku devices...
     </div>
     <div v-else>
-      <div v-if="! rokuHost">
-        Choose a Roku device:
+      <div v-if="noRokus">
+        No Roku devices found.
       </div>
-      <div v-for="(host, index) in rokuHosts" :key="host">
-        <input type="radio" :id="`roku-${index}`" :value="host" v-model="rokuHost" />
-        <label for="`roku-${index}`">{{host}}</label>
+      <div v-else>
+        <div v-if="! rokuHost">
+          Choose a Roku device:
+        </div>
+        <div v-for="(host, index) in rokuHosts" :key="host">
+          <input type="radio" :id="`roku-${index}`" :value="host" v-model="rokuHost" />
+          <label for="`roku-${index}`">{{host}}</label>
+        </div>
       </div>
     </div>
   </div>
@@ -31,6 +36,11 @@
 const axios = require('axios')
 
 export default {
+  computed: {
+    noRokus () {
+      return this.rokuHosts.length == 0
+    },
+  },
   async created () {
     this.discoveringRokus = true
     const res = await axios.get('/api/discover')
