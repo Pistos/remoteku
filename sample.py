@@ -40,11 +40,19 @@ def discover():
 def press(button):
     allowed = [
         "back",
+        "backspace",
         "down",
+        "forward",
         "home",
         "info",
         "left",
+        "mute",
+        "play",
+        "power",
+        "replay",
+        "reverse",
         "right",
+        "search",
         "select",
         "up",
     ]
