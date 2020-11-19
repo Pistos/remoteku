@@ -44,6 +44,8 @@
       <label>
         Type text:
         <input
+          @blur="textFieldFocused = false"
+          @focus="textFieldFocused = true"
           @keyup.enter="sendLiteral"
           type="text"
           v-model="literalText"
@@ -70,6 +72,19 @@ export default {
     const res = await axios.get('/api/discover')
     this.rokuHosts = res.data
     this.discoveringRokus = false
+
+    const self = this
+    window.addEventListener('keydown', function (e) {
+      if (! self.textFieldFocused) {
+        if (e.key === 'ArrowRight') { e.preventDefault(); self.apiPress('right') }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); self.apiPress('left') }
+        if (e.key === 'ArrowUp') { e.preventDefault(); self.apiPress('up') }
+        if (e.key === 'ArrowDown') { e.preventDefault(); self.apiPress('down') }
+        if (e.key === 'Enter') { e.preventDefault(); self.apiPress('select') }
+        if (e.key === 'Escape') { e.preventDefault(); self.apiPress('back') }
+        if (e.key === 'Backspace') { e.preventDefault(); self.apiPress('back') }
+      }
+    });
   },
   data: function () {
     return {
@@ -77,6 +92,7 @@ export default {
       literalText: '',
       rokuHost: null,
       rokuHosts: [],
+      textFieldFocused: false,
     }
   },
   methods: {
