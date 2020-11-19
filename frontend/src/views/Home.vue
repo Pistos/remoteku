@@ -43,7 +43,11 @@
     <div>
       <label>
         Type text:
-        <input type="text" v-model="literalText" />
+        <input
+          @keyup.enter="sendLiteral"
+          type="text"
+          v-model="literalText"
+        />
       </label>
       <button @click="sendLiteral">Enter</button>
       <button @click="apiPress('backspace')">Backspace</button>
