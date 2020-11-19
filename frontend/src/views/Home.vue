@@ -20,16 +20,6 @@
     </div>
   </div>
   <div v-if="rokuHost">
-    <button @click="apiPress('info')">info</button>
-    <button @click="apiPress('select')">select</button>
-    <button @click="apiPress('up')">up</button>
-    <button @click="apiPress('down')">down</button>
-    <button @click="apiPress('left')">left</button>
-    <button @click="apiPress('right')">right</button>
-    <button @click="apiPress('back')">back</button>
-    <button @click="apiPress('home')">home</button>
-  </div>
-  <div>
     <img src="/roku-remote.png" alt="Roku remote" usemap="#rokumap"/>
     <map name="rokumap">
       <area shape="rect" coords="124,34,175,86" title="Power" @click="apiPress('power')"/>
