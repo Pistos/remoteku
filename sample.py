@@ -36,47 +36,23 @@ def discover():
         200
     )
 
-@app.route('/api/info')
-def info():
-    current_roku.info()
-
-    return 'OK', 200
-
-@app.route('/api/back')
-def back():
-    current_roku.back()
-    return 'OK', 200
-
-@app.route('/api/home')
-def home():
-    current_roku.home()
-    return 'OK', 200
-
-@app.route('/api/up')
-def up():
-    current_roku.up()
-    return 'OK', 200
-
-@app.route('/api/down')
-def down():
-    current_roku.down()
-    return 'OK', 200
-
-@app.route('/api/left')
-def left():
-    current_roku.left()
-    return 'OK', 200
-
-@app.route('/api/right')
-def right():
-    current_roku.right()
-    return 'OK', 200
-
-@app.route('/api/select')
-def select():
-    current_roku.select()
-
-    return 'OK', 200
+@app.route('/api/press/<button>')
+def press(button):
+    allowed = [
+        "back",
+        "down",
+        "home",
+        "info",
+        "left",
+        "right",
+        "select",
+        "up",
+    ]
+    if button in allowed:
+        getattr(current_roku, button)()
+        return 'OK', 200
+    else:
+        return 'ERROR: invalid button', 400
 
 @app.route('/api/literal', methods=["POST"])
 def literal():
