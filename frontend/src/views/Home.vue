@@ -40,7 +40,7 @@
         <area shape="rect" coords="284,409,306,457" title="Mute" @click="apiPress('mute')"/>
       </map>
     </div>
-    <div>
+    <div class="text-entry">
       <label>
         Type text:
         <input
@@ -119,13 +119,19 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 img {
-  margin: 2rem;
+  margin-top: 2rem;
 }
+
 map {
   area {
     cursor: pointer;
   }
+}
+
+.text-entry {
+  display: flex;
+  max-width: 100%;
 }
 </style>
