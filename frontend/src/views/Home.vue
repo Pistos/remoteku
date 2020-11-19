@@ -51,8 +51,8 @@
           v-model="literalText"
         />
       </label>
-      <button @click="sendLiteral">Enter</button>
-      <button @click="apiPress('backspace')">Backspace</button>
+      <button @click="sendLiteral"><b>&#x23ce;</b></button>
+      <button @click="apiPress('backspace')"><b>&#x232b;</b></button>
     </div>
   </div>
 </div>
@@ -132,6 +132,11 @@ map {
 
 .text-entry {
   display: flex;
-  max-width: 100%;
+  margin: auto;
+  max-width: 330px;
+
+  input {
+    max-width: 20vw;
+  }
 }
 </style>
