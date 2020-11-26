@@ -21,6 +21,23 @@ def choose_roku():
 
     return "OK", 200
 
+@app.route('/api/apps')
+def apps():
+    apps = dict()
+    for a in current_roku.apps:
+        apps[a.id] = a.name
+
+    return make_response(
+        jsonify(apps),
+        200
+    )
+
+@app.route('/api/launch/<app_id>')
+def launch(app_id):
+    current_roku[app_id].launch()
+
+    return "OK", 200
+
 @app.route('/api/discover')
 def discover():
     rokus = Roku.discover()

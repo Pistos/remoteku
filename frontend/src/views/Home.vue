@@ -19,6 +19,7 @@
       </div>
     </div>
   </div>
+
   <div v-if="rokuHost">
     <div>
       <img src="/roku-remote.png" alt="Roku remote" usemap="#rokumap"/>
@@ -40,6 +41,7 @@
         <area shape="rect" coords="284,409,306,457" title="Mute" @click="apiPress('mute')"/>
       </map>
     </div>
+
     <div class="text-entry">
       <label>
         Type text:
@@ -53,6 +55,16 @@
       </label>
       <button @click="sendLiteral"><b>&#x23ce;</b></button>
       <button @click="apiPress('backspace')"><b>&#x232b;</b></button>
+    </div>
+
+    <div class="apps">
+      <img
+        :alt="name"
+        @click="launch(appId)"
+        :src="`app-icons/${appId}.jpg`"
+        v-for="(name, appId) in apps"
+        :key="appId"
+      />
     </div>
   </div>
 </div>
@@ -73,6 +85,9 @@ export default {
     this.rokuHosts = res.data
     this.discoveringRokus = false
 
+    const res2 = await axios.get('/api/apps')
+    this.apps = res2.data
+
     const self = this
     window.addEventListener('keydown', function (e) {
       if (! self.textFieldFocused) {
@@ -88,6 +103,7 @@ export default {
   },
   data: function () {
     return {
+      apps: {},
       discoveringRokus: false,
       literalText: '',
       rokuHost: null,
@@ -98,6 +114,9 @@ export default {
   methods: {
     async apiPress (button) {
       await axios.get(`/api/press/${button}`)
+    },
+    launch(appId) {
+      axios.get(`/api/launch/${appId}`)
     },
     async sendLiteral () {
       await axios.post(
@@ -137,6 +156,14 @@ map {
 
   input {
     max-width: 20vw;
+  }
+}
+
+.apps {
+  img {
+    cursor: pointer;
+    margin: 1em;
+    max-width: 30vw;
   }
 }
 </style>
