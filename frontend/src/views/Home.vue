@@ -98,6 +98,10 @@ export default {
         if (e.key === 'Enter') { e.preventDefault(); self.apiPress('select') }
         if (e.key === 'Escape') { e.preventDefault(); self.apiPress('back') }
         if (e.key === 'Backspace') { e.preventDefault(); self.apiPress('back') }
+        if (e.key === 'Space') { e.preventDefault(); self.apiPress('play') }
+        if (e.key === ' ') { e.preventDefault(); self.apiPress('play') }
+        if (e.key === 'PageUp') { e.preventDefault(); self.apiPress('reverse') }
+        if (e.key === 'PageDown') { e.preventDefault(); self.apiPress('forward') }
       }
     });
   },
