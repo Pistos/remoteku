@@ -30,7 +30,8 @@ Install the dependencies:
 
 Two daemons need to be running: the backend and the frontend.
 
-Start the backend (from the root of the repository):
+Start the backend (from the root of the repository, and within the Python
+virtual environment):
 
     ./start-server.sh
 
