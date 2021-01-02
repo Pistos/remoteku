@@ -2,6 +2,8 @@
 
 A web app that lets you control Roku devices on your local network
 
+https://git.sr.ht/~pistos/remoteku
+
 ## Setup
 
 ### Backend
